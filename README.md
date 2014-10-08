@@ -3,19 +3,17 @@
 This repository contains the configurations for the different platforms. Each platforms has its own branch which should contain following files:
 
 - u-boot
-  - package-atom
-  - default configuration (DTB?)
-  - patches
-  - build command
+  - defconf
 
 - kernel
-  - package-atom
-  - default configuration
-  - dtb
-  - patches
-  - build command
+  - defconf
+  - dtbconf
 
 - continous integration
   - target architecture
   - filenames
   - output path
+  
+- misc files
+  - eg. properitary firmwares (rpi)
+
