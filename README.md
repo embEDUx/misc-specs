@@ -4,3 +4,5 @@ The files in this repository will be stored on the boot partition of the platfor
 
 > Each platform has to have its own branch within this repository!
 
+
+&copy;
