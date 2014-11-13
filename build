@@ -4,8 +4,12 @@
 # Configuration     # 							     
 #####################
 
+### Sources
+SRC_SCR="boot.scr.txt"
+
 ### Outputs
 DST_IMG="misc.tar.gz"
+DST_SCR="boot.scr"
 DST_DIR="output"
 DST_PRE="$(date '+%Y%m%d')_$(date '+%H-M-S')_3.15.5"
 
@@ -26,6 +30,9 @@ mkdir ${DST_DIR}
 if [ -e ${DST_IMG} ]
 then cp ${DST_IMG} ${DST_DIR}/${DST_PRE}_${DST_IMG}
 fi
+
+### Make boot.scr
+mkimage -A arm -O linux -T script -C none -n ${DST_SCR} -d ${SRC_SCR}  ${DST_SCR}
 
 ### Clean up
 rm ${DST_IMG}
