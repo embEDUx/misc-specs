@@ -11,7 +11,7 @@ SRC_SCR="boot.scr.txt"
 DST_IMG="misc.tar.gz"
 DST_SCR="boot.scr"
 DST_DIR="output"
-DST_PRE="$(date '+%Y%m%d')_$(date '+%H-%M-%S')_3.17.5"
+DST_PRE="$(date '+%Y%m%d')_$(date '+%H-%M-%S')"
 
 #####################
 # Script            #
