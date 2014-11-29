@@ -25,7 +25,8 @@ mkdir ${DST_DIR}
 ### Pack files into archive
 if [ "$(ls | grep -v build)" ]
 	then
-        tar --exclude build,.git,${DST_IMG} -czf ${DST_DIR}/${DST_PRE}_${DST_IMG} *
+        tar --exclude={build,.git,README.md,${DST_IMG},${SRC_SCR},${DST_DIR}} \
+          -czf ${DST_DIR}/${DST_PRE}_${DST_IMG} *
 fi
 
 ### Clean up
