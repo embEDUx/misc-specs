@@ -31,4 +31,3 @@ fi
 
 ### Clean up
 rm ${SRC_DIR}/${DST_SCR}
-
