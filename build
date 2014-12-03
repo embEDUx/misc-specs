@@ -5,6 +5,7 @@
 #####################
 
 ### Sources
+SRC_DIR="src"
 SRC_SCR="boot.scr.txt"
 
 ### Outputs
@@ -16,19 +17,18 @@ DST_PRE="$(date '+%Y%m%d')_$(date '+%H-%M-%S')"
 #####################
 # Script            #
 #####################
+mkdir ${DST_DIR}
 
 ### Make boot.scr
-mkimage -A arm -O linux -T script -C none -n ${DST_SCR} -d ${SRC_SCR}  ${DST_SCR}
-
-mkdir ${DST_DIR}
+mkimage -A arm -O linux -T script -C none -n ${DST_SCR} -d ${SRC_DIR}/${SRC_SCR} \
+	${SRC_DIR}/${DST_SCR}
 
 ### Pack files into archive
 if [ "$(ls | grep -v build)" ]
   then
-        tar --exclude={build,.git,README.md,${DST_IMG},${SRC_SCR},${DST_DIR}} \
-          -czf ${DST_DIR}/${DST_PRE}_${DST_IMG} *
+        tar --exclude=${SRC_SCR} -czf ${DST_DIR}/${DST_PRE}_${DST_IMG} -C ${SRC_DIR} .
 fi
 
 ### Clean up
-rm ${DST_SCR}
+rm ${SRC_DIR}/${DST_SCR}
 
