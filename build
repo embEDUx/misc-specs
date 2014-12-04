@@ -5,30 +5,34 @@
 #####################
 
 ### Sources
-SRC_SCR="boot.scr.txt"
-
-### Outputs
-DST_IMG="misc.tar.gz"
-DST_SCR="boot.scr"
-DST_DIR="output"
-DST_PRE="$(date '+%Y%m%d')_$(date '+%H-%M-%S')"
+BOOT_DIR="src_boot"
+ROOT_DIR="src_root"
+BOOT_SCR="boot.scr"
 
 #####################
 # Script            #
 #####################
 
 ### Make boot.scr
-mkimage -A arm -O linux -T script -C none -n ${DST_SCR} -d ${SRC_SCR}  ${DST_SCR}
+mkimage -A arm -O linux -T script -C none -n ${BOOT_SCR} -d ${BOOT_DIR}/${BOOT_SCR}.txt \
+	${BOOT_DIR}/${BOOT_SCR}
 
-mkdir ${DST_DIR}
+### Prepare output
+OUTPUT_BOOT="$(git rev-parse --abbrev-ref HEAD)_$(git rev-parse HEAD)_misc-boot.tar.gz"
+OUTPUT_ROOT="$(git rev-parse --abbrev-ref HEAD)_$(git rev-parse HEAD)_misc-root.tar.gz"
+OUTPUT_DIR="output"
 
-### Pack files into archive
-if [ "$(ls | grep -v build)" ]
-	then
-        tar --exclude={build,.git,README.md,${DST_IMG},${SRC_SCR},${DST_DIR}} \
-          -czf ${DST_DIR}/${DST_PRE}_${DST_IMG} *
+mkdir -p ${OUTPUT_DIR}
+
+if [ -e ${BOOT_DIR} ]
+  then 
+    echo "Packing files for boot partition in ${OUTPUT_BOOT}"
+    tar --exclude=${BOOT_SCR}.txt -czf ${OUTPUT_DIR}/${OUTPUT_BOOT} -C ${BOOT_DIR} .
 fi
 
-### Clean up
-rm ${DST_SCR}
+if [ -e ${ROOT_DIR} ]
+  then
+    echo "Packing files for root partition in ${OUTPUT_ROOT}"
+    tar --exclude=${BOOT_SCR}.txt -czf ${OUTPUT_DIR}/${OUTPUT_ROOT} -C ${ROOT_DIR} .
+fi
 
