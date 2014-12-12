@@ -18,8 +18,8 @@ mkimage -A arm -O linux -T script -C none -n ${BOOT_SCR} -d ${BOOT_DIR}/${BOOT_S
 	${BOOT_DIR}/${BOOT_SCR}
 
 ### Prepare output
-OUTPUT_BOOT="$(git rev-parse --abbrev-ref HEAD)_$(git rev-parse HEAD)_misc-boot.tar.gz"
-OUTPUT_ROOT="$(git rev-parse --abbrev-ref HEAD)_$(git rev-parse HEAD)_misc-root.tar.gz"
+OUTPUT_BOOT="$$(git rev-parse --abbrev-ref HEAD)_date +%Y%m%d%H%M%S_$(git rev-parse HEAD)_misc-boot.tar.gz"
+OUTPUT_ROOT="$$(git rev-parse --abbrev-ref HEAD)_date +%Y%m%d%H%M%S_$(git rev-parse HEAD)_misc-root.tar.gz"
 OUTPUT_DIR="output"
 
 mkdir -p ${OUTPUT_DIR}
