@@ -2,7 +2,8 @@ setenv loadaddr 10800000
 setenv fdtaddr 11000000
 setenv bootm_low 18000000
 
-setenv fdtfile imx6q-cm-fx6.dtb 
+setenv mmcdev 2
+setenv fdtfile imx6q-sbc-fx6m.dtb 
 setenv kernel zImage
 
 mmc dev ${mmcdev}
