@@ -9,5 +9,6 @@ setenv kernel zImage
 mmc dev ${mmcdev}
 fatload mmc ${mmcdev} ${loadaddr} ${kernel}
 fatload mmc ${mmcdev} ${fdtaddr} ${fdtfile}
-setenv bootargs "console=ttymxc3,115200 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait noinitrd cm_fx6_v4l_msize=128M vmalloc=256M"
+setenv bootargs "console=ttymxc3,115200 root=/dev/mmcblk0p2 rw rootfstype=ext4
+rootwait noinitrd mxcfb0:dev=hdmi,1920x1080M-24@50,if=RGB24"
 bootz ${loadaddr} - ${fdtaddr}
